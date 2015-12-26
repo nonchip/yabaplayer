@@ -1,7 +1,7 @@
 ffi  = require "ffi"
 bit  = require "bit"
 jit  = require "jit"
-J    = require "jack"
+J    = require "jack_lib"
 math = require "math"
 io   = require "io"
 
@@ -25,7 +25,6 @@ cb_process = do
     outb = J.jack_port_get_buffer output_port, nframes
     ffi.copy outb, buffer+ptr, nframes * framesize
     ptr += nframes
-    print ptr
     if ptr >= len-1
       playing=false
       return 1

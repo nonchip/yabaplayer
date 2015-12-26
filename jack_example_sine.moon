@@ -1,7 +1,7 @@
 ffi  = require "ffi"
 bit  = require "bit"
 jit  = require "jit"
-J    = require "jack"
+J    = require "jack_lib"
 math = require "math"
 
 output_port = J.t_port!
