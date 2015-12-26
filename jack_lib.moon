@@ -17,9 +17,9 @@ setmetatable {
   t_client: ffi.typeof "jack_client_t*"
   t_status: ffi.typeof "jack_status_t*"
 
-  cb_process:    (fun)-> ffi.cast "int  (*) (jack_nframes_t,void*)", fun
-  cb_shutdown:   (fun)-> ffi.cast "void (*) (void*)",                fun
-  cb_error:      (fun)-> ffi.cast "void (*) (const char *)",         fun
-  cb_samplerate: (fun)-> ffi.cast "int  (*) (jack_nframes_t,void*)", fun
+  cb_process:    (fun)-> ffi.cast "int(*)(jack_nframes_t,void*)", fun
+  cb_shutdown:   (fun)-> ffi.cast "void(*)(void*)",                fun
+  cb_error:      (fun)-> ffi.cast "void(*)(const char *)",         fun
+  cb_samplerate: (fun)-> ffi.cast "int(*)(jack_nframes_t,void*)", fun
 
 }, { __index: jack }
