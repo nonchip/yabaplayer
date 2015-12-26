@@ -2,6 +2,7 @@ ffi = require "ffi"
 j   = require "jack_lib"
 
 class JACK
+  @j:j
   cb_error: (str)=>
     j.jack_client_close @cl
     error str
@@ -12,9 +13,13 @@ class JACK
     0
   cb_process: (nframes)=>
     for i,port in ipairs @oports
-      buf = j.jack_port_get_buffer port, nframes
-      ffi.fill buf, nframes * ffi.sizeof"jack_default_audio_sample_t"
+      @cb_process_port port,nframes
     0
+  cb_process_port: (port,nframes)=>
+    buf = ffi.cast "jack_default_audio_sample_t*", j.jack_port_get_buffer port, nframes
+    @cb_process_port_buffer buf, port, nframes
+  cb_process_port_buffer: (buf,port,nframes)=>
+    ffi.fill buf, nframes * ffi.sizeof"jack_default_audio_sample_t"
   cb_samplerate: (rate)=>
     @samplerate=rate
     print "new sample rate: %d"\format rate
