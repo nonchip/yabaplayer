@@ -1,5 +1,5 @@
 ffi=require "ffi"
-JACK=require "jack"
+JACK=require "JACK"
 
 class jackSine extends JACK
   new: (hz,...)=>
