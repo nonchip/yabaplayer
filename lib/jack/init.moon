@@ -1,5 +1,5 @@
 ffi = require "ffi"
-j   = require "jack_lib"
+j   = require "JACK.jack_lib"
 
 class JACK
   @j:j

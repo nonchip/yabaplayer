@@ -1,5 +1,5 @@
 ffi=require"ffi"
-ffi.cdef require "jack_cdef"
+ffi.cdef require "JACK.jack_cdef"
 jack=ffi.load "libjack"
 
 setmetatable {
