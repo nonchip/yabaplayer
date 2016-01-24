@@ -1,5 +1,7 @@
 #!/bin/zsh
 
+cd "$(dirname "$(readlink -f "$0")")"
+
 echo 'return [==[' > jack_cdef.lua
 
 cpp jack_includes.h | grep -v '^#' | grep -v '^$' >> jack_cdef.lua
