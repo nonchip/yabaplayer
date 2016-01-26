@@ -5,7 +5,7 @@
       super ...
     cb_process_port_buffer: (buf,port,nframes)=>
       portkey="port["..ffi.string(@@j.jack_port_name(port)).."]"
-      if @the_linda\count(portkey) > nframes*2
+      if @the_linda\count(portkey) > nframes*10
         ret = {@the_linda\receive 0, @the_linda.batched, portkey, nframes, nframes}
         if ret[1] and #ret==nframes+1
           @the_linda\set 0, "status-"..portkey, true
