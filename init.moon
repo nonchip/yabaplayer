@@ -25,8 +25,9 @@ jit.off! -- callback fence start
 wait=true
 while wait
   ffi.C.sleep 1
-  _,v = raw_audio_linda\get "status-port[yabaplayer:output-1]"
-  if v==false
+  if false==raw_audio_linda\get "status-port[yabaplayer:output-1]"
+    wait=false
+  if false==raw_audio_linda\get "status-port[yabaplayer:output-2]"
     wait=false
 jit.on! -- callback fence end
 
