@@ -5,20 +5,15 @@ lanes = require"lanes".configure{
 ffi=require "ffi"
 
 jackthread_factory=lanes.gen "*", require "jackthread"
+filethread_factory=lanes.gen "*", require "filethread"
 
 raw_audio_linda = lanes.linda!
 raw_audio_linda\limit "port[yabaplayer:output-1]", 1024*100
 raw_audio_linda\limit "port[yabaplayer:output-2]", 1024*100
 
 jackthread=jackthread_factory raw_audio_linda
+filethread=filethread_factory raw_audio_linda, "example.f32"
 
-fp=io.open"example.f32", "r"
-str=fp\read "*a"
-len=#str
-ptr=ffi.cast "float*", ffi.cast "void*", str
-for i=0,len/ffi.sizeof"float"
-  while not raw_audio_linda\send 1, "port[yabaplayer:output-1]", ptr[i]
-    nil
 
 ffi.cdef "unsigned int sleep(unsigned int seconds);"
 jit.off! -- callback fence start
